@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Edit Book
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/form.css">
+{% endblock %}
+
+{% block content %}
+<div id="canvas">
+    <a href="{{url_for('view_section', id=book.section_id)}}"><i class="bi bi-arrow-left-circle-fill"> Go Back</i></a>
+    <h2>Edit Book</h2>
+
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <label for="title" class="form-label">Book Title: </label>
+        <input type="text" class="form-control" id="title" name="title" value="{{book.title}}" required>
+
+        <label for="author" class="form-label">Author:</label>
+        <input type="text" class="form-control" id="author" name="author" value="{{book.author}}" required>
+
+        <label for="price" class="form-label">Price(₹):</label>
+        <input type="number" min="1" value="{{book.price}}" step=".01" class="form-control" id="price" name="price" required>
+
+        <label for="section" class="form-label">Section:</label>
+        <select class="form-select" id="section" name="section" required>
+            {% for section in sections %}
+            {% if section.id == book.section_id %}
+            <option selected value="{{section.id}}">{{section.name}}</option>
+            {% else %}
+            <option value="{{section.id}}">{{section.name}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="content" class="form-label">Content:</label>
+        <textarea class="form-control" rows="5" name="content">{{book.content}}</textarea>
+
+        <div style="text-align:center;">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock %}

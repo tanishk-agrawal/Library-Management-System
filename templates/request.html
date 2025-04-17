@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Request Book
+{% endblock %}
+
+{% block style %}
+<style>
+    .alert {
+        margin: auto;
+        margin-top: 10%;
+        width : 350px
+    }  
+    #btn-grp {
+        text-align:center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="alert alert-secondary" role="alert">
+    <h5 class="alert-heading">Request</h5>
+    
+    <form action="" method="post">
+        <p >
+            <strong>Title : {{book.title}}</strong> <br>
+            <strong>Author : </strong>{{book.author}} <br>
+            <strong>Section : </strong>{{book.section.name}} <br>
+            <label for="days" class="d-flex gap-2">
+            <strong>#Days : </strong>
+            <input class="form-control form-control-sm" style="width: min-content;" type="number" value="7" min="1" max="30" name="days" id="days">
+        </label>
+        </p>
+        <div id="btn-grp">
+        <input type="Submit" class="btn btn-primary" value="Request">
+        <a href="{{url_for('show_book', id=book.id)}}" class="btn btn-outline-secondary">Cancel</a>
+        </div>    
+    </form>
+</div>
+{% endblock %}

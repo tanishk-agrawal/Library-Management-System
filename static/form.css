@@ -1,0 +1,8 @@
+input,textarea, select {
+    margin-bottom: 8px;
+}
+#canvas {
+    border-radius: 10px;
+    margin: auto;
+    padding: 15px;
+}

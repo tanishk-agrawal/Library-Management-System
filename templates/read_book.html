@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+{% block style %}
+<style>
+    #title {
+        text-align: center;
+        border: 1px solid #cccdcf;
+        border-radius: 15px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    #canvas {
+        margin: auto;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #cccdcf;
+        border-radius: 15px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div>
+    <a href="{{url_for('show_book', id=book.id)}}"><i class="bi bi-arrow-left-circle-fill"> Go Back</i></a>
+    <div id="title">
+        <h3>{{book.title}}</h3>
+        by {{book.author}}
+    </div>
+</div>
+
+<div id="canvas">
+    {{txt|safe}}
+</div>
+{% endblock %}

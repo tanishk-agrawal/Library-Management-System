@@ -1,0 +1,41 @@
+#topnav {
+    width: 100%;
+    z-index: 5;
+   
+    position: fixed;
+    top: 0;
+    left: 0;
+ 
+    background-color: #f8f9fa;
+    border-bottom: 1px solid gray;
+   
+    padding: 8px;
+ }
+ 
+ .navbar-link {
+    display: inline-block;
+    margin: auto;
+    padding-right: 10px;
+    height: 40px;
+ 
+    color: black;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+ }
+ 
+ #logo {
+    margin-left: 5px;
+    width: auto;
+    font-size: 22px;
+    font-weight: 400;
+   
+ }
+ 
+ #rt {
+    margin-right: 15px;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+ }

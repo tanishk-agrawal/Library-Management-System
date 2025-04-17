@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Add Section
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/form.css">
+{% endblock %}
+
+{% block content %}
+<div id="canvas">
+    <a href="{{url_for('show_book', id=book.id)}}"><i class="bi bi-arrow-left-circle-fill"> Go Back</i></a>
+    <h2>Review Book</h2>
+
+
+    <form action="" method="post">
+
+        <div class="d-flex justify-content-between my-5">
+            <strong class="form-label">Rating:</strong>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rating" id="rating" value="1">
+                <label class="form-check-label" for="rating">1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rating" id="rating" value="2">
+                <label class="form-check-label" for="rating">2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rating" id="rating" value="3">
+                <label class="form-check-label" for="rating">3</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rating" id="rating" value="4">
+                <label class="form-check-label" for="rating">4</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rating" id="rating" value="5">
+                <label class="form-check-label" for="rating">5</label>
+            </div>
+        </div>
+
+        <label for="comment" class="form-label">Comment:</label>
+        <textarea class="form-control" rows="5" name="comment"></textarea>
+
+        <div style="text-align:center;">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock %}

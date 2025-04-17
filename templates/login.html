@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/auth_form.css">
+{% endblock %}
+
+{% block content %}
+<div id="canvas">
+    <h2>Login</h2>
+    <form action="" method="post">
+        
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        
+        <div style="text-align: center;">
+            <input type="submit" value="Login" class="btn btn-primary">
+            <p>Don't have an account? <a href="{{url_for('register')}}">Register here</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

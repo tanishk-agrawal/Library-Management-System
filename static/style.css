@@ -1,0 +1,20 @@
+.card-grp{
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    /* d-flex gap-3 overflow-x-auto mb-3 */
+}
+
+.no-bullets {
+    list-style-type: none;
+}
+
+#book-btn {
+    width: 200px;
+}
+
+#add-btn {
+    width:100%;
+    margin-bottom: 30px;
+}

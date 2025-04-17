@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Requests
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Requests</h2>
+
+    {% if req %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Book Section</th>
+                <th scope="col">Username</th>
+                <th scope="col">No. of Days</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in req %}
+            <tr>
+                <form action="{{url_for('grant_request', id=item.id)}}" method="post">
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{item.book.title}}</td>
+                    <td>{{item.book.section.name}}</td>
+                    <td>@{{username[item.user_id]}}</td>
+                    <td>
+                        <input type="number" class="form-control form-control-sm" style="width: min-content;"
+                            name="days" id="days" value="{{item.no_of_days}}" min="1" max="30">
+                    </td>
+                    <td>
+                        <div>
+                            <button type="submit" class="btn btn-success btn-sm"> Grant</button>
+                            <a href="{{url_for('reject_request', id=item.id)}}" class="btn btn-danger btn-sm">
+                                Reject</a>
+                        </div>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        No Requests!!
+    </div>
+    {% endif %}
+</div>
+<hr>
+<div>
+    <h2>Borrowings</h2>
+
+    {% if borrows %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Book Section</th>
+                <th scope="col">Username</th>
+                <th scope="col">Issued on</th>
+                <th scope="col">Due on</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in borrows %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{item.book.title}}</td>
+                <td>{{item.book.section.name}}</td>
+                <td>@{{username[item.user_id]}}</td>
+                <td>{{item.issued_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+                <td>{{item.due_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+                <td>
+                    <div>
+                        <a href="{{url_for('revoke_borrow', id=item.id)}}" class="btn btn-danger btn-sm">
+                            Revoke</a>
+                    </div>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        No Borrowings!!
+    </div>
+    {% endif %}
+</div>
+<hr>
+<div>
+    {% if buys %}
+    <h2>Buyings</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Book Section</th>
+                <th scope="col">Username</th>
+                <th scope="col">Bought on</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in buys %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{item.book.title}}</td>
+                <td>{{item.book.section.name}}</td>
+                <td>@{{username[item.user_id]}}</td>
+                <td>{{item.buy_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock %}

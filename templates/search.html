@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Library Management System
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/search_box.css">
+{% endblock %}
+
+{% block content %}
+<div id="search-box">
+    <form action="{{url_for('search')}}" class="input-group">
+        <select class="form-select" name="filter">
+            {% for item in srch_filter %}
+            {% if item == srch_args['filter'] %}
+            <option value="{{item}}" selected>{{srch_filter[item]}}</option>
+            {% else %}
+            <option value="{{item}}">{{srch_filter[item]}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <input type="text" class="form-control" placeholder="Type to Search..." value="{{srch_args['value']}}" name="value" id="search">
+        <button type="submit" class="btn btn-outline-primary"> <i class="bi bi-search"> </i></button>
+    </form>
+</div>
+
+<div>
+    {% if books|length >0 %}
+    <h5>{{books|length}} results found for "{{srch_args['value']}}" </h5>
+    <div class="d-flex flex-wrap gap-3">
+        {% for book in books%}
+        <div class="card bg-light" style="width: 15rem;">
+            <div class="card-header">
+                <span class="badge text-bg-primary">{{book.section.name}}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">by {{book.author}}</h6>
+                <div class="fw-light">
+                    {% if book.reviews|length>0 %}                        
+                    {{avg_rating[book.id]}} average rating based on {{book.reviews|length}} review(s).
+                    {% else %}
+                    No reviews yet
+                    {% endif %}
+                    <a href="{{url_for('show_book', id=book.id)}}" class="opacity-0 stretched-link">link</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h5>No results found</h5>
+    {% endif %}
+    
+</div>
+
+{% endblock %}

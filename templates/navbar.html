@@ -1,0 +1,20 @@
+<div id="topnav">
+    <a id="logo" class="navbar-link" href="/">Library Management System</a>
+    <div id="rt" class="nav-link">
+        {% if 'user_id' in session %}
+            {% if is_admin %}
+            <a class="navbar-link" href="/admin">Stats</a>
+            <a class="navbar-link" href="/manage">Manage</a>
+            <a class="navbar-link" href="/requests">Requests</a>
+            {% else %}
+            <a class="navbar-link" href="/">Home</a>
+            <a class="navbar-link" href="/mybooks">My Books</a>
+            {% endif %}
+        <a class="navbar-link" href="/profile">Profile</a>
+        <a class="btn btn-outline-danger" href="/logout">Logout</a>
+        {% else %}
+
+        {% endif %}
+    </div>
+
+</div>

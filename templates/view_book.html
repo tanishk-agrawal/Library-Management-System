@@ -1,0 +1,173 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+<a href="{{url_for('view_section', id=book.section.id)}}"><i class="bi bi-arrow-left-circle-fill"> Go Back</i></a>
+<h3>{{book.title}}</h3>
+<div>
+    <ul class="no-bullets">
+        <li>Author : {{book.author}}</li>
+        <li>Section : {{book.section.name}}</li>
+        <li>Added_on : {{book.added_on.strftime("%d/%m/%Y, %I:%M %p")}}</li>
+    </ul>
+    <hr>
+</div>
+
+
+
+<div>
+    {% if book.reqst|length>0 %}
+    <div class="border border-secondary-subtle p-4">
+        <h5>Requests</h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">No. of Days</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in book.reqst %}
+                <tr>
+                    <form action="{{url_for('grant_request', id=item.id)}}" method="post">
+                        <th scope="row">{{loop.index}}</th>
+                        <td>@{{username[item.user_id]}}</td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" style="width: min-content;"
+                                name="days" id="days" value="{{item.no_of_days}}" min="1" max="30">
+                        </td>
+                        <td>
+                            <div>
+                                <button type="submit" class="btn btn-success btn-sm"> Grant</button>
+                                <a href="{{url_for('reject_request', id=item.id)}}" class="btn btn-danger btn-sm">
+                                    Reject</a>
+                            </div>
+                        </td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+    <hr>  
+    {% endif %}
+</div>
+
+
+<div>
+    {% if borrows|length>0 %}
+    <div class="border border-secondary-subtle p-4">
+        <h5>Current Borrowings</h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Issued on</th>
+                    <th scope="col">Due on</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in borrows %}
+                {% if item.returned_on==None %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>@{{username[item.user_id]}}</td>
+                    <td>{{item.issued_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+                    <td>{{item.due_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+                    <td>
+                        <div>
+                            <a href="{{url_for('revoke_borrow', id=item.id)}}" class="btn btn-danger btn-sm">
+                                Revoke</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    {% endif %}
+    
+</div>
+
+
+<div>
+    {% if book.bought|length>0 %}
+    <div class="border border-secondary-subtle p-4">
+        <h5>Buyings</h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Bought on</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in book.bought %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>@{{username[item.user_id]}}</td>
+                    <td>{{item.buy_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    {% endif %}
+</div>
+
+
+<div>
+    {% if book.reviews|length>0 %}
+    <div class="border border-secondary-subtle p-4">
+        <h5>Reviews</h5>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Reviewed on</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in book.reviews %}
+                <tr>
+                    <td>@{{username[item.user_id]}}</td>
+                    <td>{{item.reviewed_on.strftime("%d/%m/%Y, %I:%M %p")}}</td>
+                    <td>{{item.rating}}</td>
+                    <td>{{item.comment}}</td>
+                    <td>
+                        <div>
+                            <a href="{{url_for('remove_review', id=item.id)}}" class="btn btn-danger btn-sm">
+                                Remove</a>
+                        </div>
+                    </td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    {% endif %}
+</div>
+
+{% endblock %}

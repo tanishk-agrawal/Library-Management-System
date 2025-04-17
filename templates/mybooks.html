@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+My Books
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+<h2>My Books</h2>
+
+<div>
+    {% if curr_borrows|length >0 %}
+    <h4>Currently Borrowed</h4>
+    <div class="card-grp">
+        {% for item in curr_borrows %}
+        <div class="card bg-light" style="min-width: 15rem; max-width: 16rem;">
+            <div class="card-header">
+                <span class="badge text-bg-primary">{{item.book.section.name}}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{item.book.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">by {{item.book.author}}</h6>
+                <div class="fw-light">
+                    {% if item.book.reviews|length>0 %}                        
+                    {{avg_rating[item.book.id]}} average rating based on {{item.book.reviews|length}} review(s).
+                    {% else %}
+                    No reviews yet
+                    {% endif %}
+                    <a href="{{url_for('show_book', id=item.book.id)}}" class="opacity-0 stretched-link">link</a>
+                </div>
+            </div>
+            <div class="card-footer fw-medium fst-italic">
+                Due on: {{item.due_on.strftime("%d/%m/%Y, %I:%M %p")}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+    {% else %}
+        
+    {% endif %}
+</div>
+
+<div>
+    {% if reqsts|length >0 %}
+    <h4>Requested</h4>
+    <div class="card-grp">
+        {% for item in reqsts %}
+        <div class="card bg-light" style="min-width: 15rem; max-width: 16rem;">
+            <div class="card-header">
+                <span class="badge text-bg-primary">{{item.book.section.name}}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{item.book.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">by {{item.book.author}}</h6>
+                <div class="fst-italic">
+                    Requested for {{item.no_of_days}} day(s)
+                    <a href="{{url_for('show_book', id=item.book.id)}}" class="opacity-0 stretched-link">link</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+    {% else %}
+        
+    {% endif %}
+</div>
+
+<div>
+    {% if buys|length >0 %}
+    <h4>Bought</h4>
+    <div class="card-grp">
+        {% for item in buys %}
+        <div class="card bg-light" style="min-width: 15rem; max-width: 16rem;">
+            <div class="card-header">
+                <span class="badge text-bg-primary">{{item.book.section.name}}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{item.book.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">by {{item.book.author}}</h6>
+                <div class="fw-light">
+                    {% if item.book.reviews|length>0 %}                        
+                    {{avg_rating[item.book.id]}} average rating based on {{item.book.reviews|length}} review(s).
+                    {% else %}
+                    No reviews yet
+                    {% endif %}
+                    <a href="{{url_for('show_book', id=item.book.id)}}" class="opacity-0 stretched-link">link</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+    {% else %}
+        
+    {% endif %}
+</div>
+
+<div>
+    {% if past_borrows|length >0 %}
+    <h4>Past</h4>
+    <div class="card-grp">
+        {% for book in past_borrows %}
+        <div class="card bg-light" style="min-width: 15rem; max-width: 16rem;">
+            <div class="card-header">
+                <span class="badge text-bg-primary">{{book.section.name}}</span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">by {{book.author}}</h6>
+                <div class="fw-light">
+                    {% if book.reviews|length>0 %}                        
+                    {{avg_rating[book.id]}} average rating based on {{book.reviews|length}} review(s).
+                    {% else %}
+                    No reviews yet
+                    {% endif %}
+                    <a href="{{url_for('show_book', id=book.id)}}" class="opacity-0 stretched-link">link</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+    {% else %}
+        
+    {% endif %}
+</div>
+{% endblock %}

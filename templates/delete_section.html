@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Delete Section
+{% endblock %}
+
+{% block style %}
+<style>
+    .alert {
+        margin: auto;
+        margin-top: 10%;
+        width : 350px
+    }  
+    form {
+        text-align:center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="alert alert-secondary" role="alert">
+    <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"> </i>Confirm Deletion </h5>
+    Are you sure you want to delete this Section?
+    <p>
+        <strong>Name : {{section.name}}</strong> <br>
+        <strong>#Books : </strong>{{section.books|length}} <br>
+    </p>
+    <form action="" method="post">
+        <input type="Submit" class="btn btn-danger" value="Delete">
+        <a href="{{url_for('section')}}" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Buy Book
+{% endblock %}
+
+{% block style %}
+<style>
+    .alert {
+        margin: auto;
+        margin-top: 10%;
+        width : 350px
+    }  
+    form {
+        text-align:center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="alert alert-secondary" role="alert">
+    <h5 class="alert-heading">Payment</h5>
+    
+        <p>
+            <ul class="no-bullets">
+            <li><strong>Title : {{book.title}}</strong> </li>
+            <li><strong>Author : </strong>{{book.author}} </li>
+            <li><strong>Section : </strong>{{book.section.name}} </li>
+            <li><strong>Amount : </strong> &#8377;{{book.price}}</li>
+        </ul>
+        </p>
+        <form action="" method="post" id="btn-grp">
+            <button type="Submit" class="btn btn-warning"><i class="bi bi-cash-stack"></i> Pay</button>
+            <a href="{{url_for('show_book', id=book.id)}}" class="btn btn-outline-secondary">Cancel</a>
+        </form>   
+    
+</div>
+{% endblock %}
